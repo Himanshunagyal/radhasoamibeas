@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rssb-red: #8B1A1A;
+  --color-rssb-redDark: #6B1212;
+  --color-rssb-redLight: #A52020;
+  --color-rssb-gold: #C8952A;
+  --color-rssb-goldLight: #E8B84B;
+  --color-rssb-cream: #FDF8F0;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+html { scroll-behavior: smooth; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #8B1A1A; border-radius: 3px; }

@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { quotes } from '../../content/data';
+import QuoteCard from '../../components/QuoteCard';
+import ChatWidget from '../../components/ChatWidget';
+
+const topics = [...new Set(quotes.map(q => q.topic))];
+const masters = [...new Set(quotes.map(q => q.author))];
+---
+
+<Layout title="Quotes" description="Spiritual quotes from RSSB Masters — Maharaj Sawan Singh Ji, Maharaj Charan Singh Ji, Baba Gurinder Singh Ji. Download and share.">
+  
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">Spiritual Quotes</h1>
+    <p class="text-red-200">Words of wisdom from the RSSB Masters • Download & Share 🙏</p>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="bg-rssb-cream border-b border-red-200 py-4 px-4 sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto flex flex-wrap gap-2 justify-center">
+      <span class="text-rssb-red font-semibold text-sm mr-2">Topics:</span>
+      {topics.map(topic => (
+        <button data-topic={topic} class="topic-filter text-xs px-3 py-1 rounded-full border border-rssb-red text-rssb-red hover:bg-rssb-red hover:text-white transition capitalize">
+          {topic}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <section class="py-10 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="quotes-grid">
+        {quotes.map(quote => (
+          <div data-topic={quote.topic}>
+            <QuoteCard quote={quote} lang="en" client:load />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Language toggle note -->
+  <section class="bg-rssb-cream py-8 px-4 text-center">
+    <p class="text-rssb-red font-semibold mb-2">Want quotes in Hindi or Punjabi?</p>
+    <div class="flex justify-center gap-3">
+      <a href="/hi/quotes" class="bg-rssb-red text-white px-4 py-2 rounded-full text-sm hover:bg-rssb-redDark transition">हिंदी में देखें</a>
+      <a href="/pa/quotes" class="bg-rssb-red text-white px-4 py-2 rounded-full text-sm hover:bg-rssb-redDark transition">ਪੰਜਾਬੀ ਵਿੱਚ ਦੇਖੋ</a>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChatWidget from '../components/ChatWidget';
+
+const masters = [
+  {
+    name: "Soami Ji Maharaj",
+    dates: "1818 – 1878",
+    fullName: "Shiv Dayal Singh Ji",
+    role: "Founder of Radha Soami Faith",
+    description: "Soami Ji Maharaj, known as Shiv Dayal Singh Ji, was born in Agra in 1818. He is regarded as the founder of the Radha Soami Faith and the revealer of Surat Shabd Yoga to the world in modern times. His teachings are recorded in the Sar Bachan — both poetry and prose.",
+    quote: "The soul must withdraw its attention from the world and fix it on the Sound Current within.",
+    books: ["Sar Bachan Prose", "Sar Bachan Poetry"],
+  },
+  {
+    name: "Baba Jaimal Singh Ji",
+    dates: "1839 – 1903",
+    fullName: "Baba Jaimal Singh Ji",
+    role: "Founder of Dera Beas",
+    description: "An initiated disciple of Soami Ji Maharaj, Baba Jaimal Singh Ji established the Dera at Beas in 1891. A soldier and a saint, he is revered for his extraordinary spiritual attainment and deep love for the Master.",
+    quote: "Seek the company of saints; their company alone can purify the mind.",
+    books: ["Spiritual Letters"],
+  },
+  {
+    name: "Maharaj Sawan Singh Ji",
+    dates: "1858 – 1948",
+    fullName: "Maharaj Sawan Singh Ji",
+    role: "The Great Master",
+    description: "Known as the Great Master, Maharaj Sawan Singh Ji initiated hundreds of thousands of disciples worldwide and built Dera Beas into a major spiritual centre. An engineer by profession, he answered thousands of spiritual letters, many compiled in 'Spiritual Gems'.",
+    quote: "Love is the very essence of spirituality. Without love, there is no progress on the spiritual path.",
+    books: ["Philosophy of the Masters (5 vols)", "Spiritual Gems", "My Submission"],
+  },
+  {
+    name: "Maharaj Jagat Singh Ji",
+    dates: "1884 – 1951",
+    fullName: "Maharaj Jagat Singh Ji",
+    role: "The Science of the Soul",
+    description: "A retired professor and Principal, Maharaj Jagat Singh Ji served as Master for only three years but left a deep mark. His book 'The Science of the Soul' is considered an accessible masterwork for modern spiritual seekers.",
+    quote: "Simran is the food of the soul. Just as the body needs food to survive, the soul needs Simran to progress.",
+    books: ["The Science of the Soul"],
+  },
+  {
+    name: "Maharaj Charan Singh Ji",
+    dates: "1916 – 1990",
+    fullName: "Maharaj Charan Singh Ji",
+    role: "The Beloved Master",
+    description: "Maharaj Charan Singh Ji served as Master for over 40 years, growing RSSB to a worldwide organization with millions of initiates. A lawyer and farmer, he answered countless seekers' questions in books like 'Die to Live', 'Legacy of Love', and 'Light on Sant Mat'.",
+    quote: "The purpose of human life is to realize God, and the way to realize God is through meditation.",
+    books: ["Die to Live", "Light on Sant Mat", "Legacy of Love", "Spiritual Discourses (2 vols)"],
+  },
+  {
+    name: "Baba Gurinder Singh Ji",
+    dates: "1954 – present",
+    fullName: "Baba Gurinder Singh Ji Dhillon",
+    role: "Current Master (since 1990)",
+    description: "Baba Gurinder Singh Ji has been the head of RSSB since 1990. Under his guidance, RSSB continues to grow and serve humanity through spiritual teachings and humanitarian work through SOSM (Science of the Soul Mission). He emphasizes love, meditation, and living an ethical life.",
+    quote: "The Master is not the body. The Master is the Shabd — the divine sound current within you.",
+    books: ["Streams of Nectar", "Spiritual Perspectives (3 vols)"],
+  },
+];
+---
+
+<Layout title="RSSB Masters" description="Learn about the Masters of Radha Soami Satsang Beas — from Soami Ji Maharaj to Baba Gurinder Singh Ji. Their lives, teachings, and books.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">🙏 The Masters</h1>
+    <p class="text-red-200">The lineage of spiritual Masters of Radha Soami Satsang Beas</p>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-4xl mx-auto space-y-8">
+      {masters.map((master, i) => (
+        <div class="bg-white rounded-2xl border border-red-200 overflow-hidden hover:shadow-lg transition">
+          <div class="flex items-center gap-4 bg-gradient-to-r from-rssb-redDark to-rssb-red text-white px-6 py-4">
+            <div class="w-12 h-12 rounded-full bg-rssb-gold flex items-center justify-center text-rssb-redDark font-bold text-lg flex-shrink-0">
+              {i + 1}
+            </div>
+            <div>
+              <h2 class="font-serif text-xl font-bold">{master.name}</h2>
+              <p class="text-rssb-goldLight text-sm">{master.dates} • {master.role}</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 leading-relaxed mb-4">{master.description}</p>
+            
+            <!-- Quote -->
+            <blockquote class="border-l-4 border-rssb-gold pl-4 my-4 italic text-rssb-red">
+              "{master.quote}"
+            </blockquote>
+
+            <!-- Books -->
+            <div>
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Related Books</p>
+              <div class="flex flex-wrap gap-2">
+                {master.books.map(book => (
+                  <span class="text-xs bg-rssb-cream border border-red-200 text-rssb-red px-3 py-1 rounded-full">{book}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

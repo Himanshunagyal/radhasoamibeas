@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { books } from '../../content/data';
+import ChatWidget from '../../components/ChatWidget';
+---
+
+<Layout title="RSSB Books" description="Complete guide to RSSB Radha Soami Satsang Beas books — Sar Bachan, Philosophy of the Masters, Die to Live and more. Summaries and where to get them.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">📚 RSSB Books</h1>
+    <p class="text-red-200">Summaries and guides to all major RSSB publications</p>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="bg-rssb-cream rounded-2xl p-6 mb-10 border border-red-200">
+        <h2 class="font-serif text-xl font-bold text-rssb-red mb-2">About RSSB Publications</h2>
+        <p class="text-gray-700 text-sm leading-relaxed">
+          RSSB books are available at cost price from RSSB centers and the official website. They are never sold for profit. The books cover Sant Mat philosophy, spiritual practice, and the teachings of the Masters across generations.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {books.map(book => (
+          <a href={`/books/${book.slug}`} class="bg-white rounded-2xl border border-red-200 hover:border-rssb-red hover:shadow-lg transition p-6 group flex gap-4">
+            <div class="w-16 h-20 bg-gradient-to-b from-rssb-red to-rssb-redDark rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+              <span class="text-white text-2xl">📗</span>
+            </div>
+            <div class="flex-1">
+              <h2 class="font-serif font-bold text-rssb-red group-hover:text-rssb-redDark text-lg leading-tight mb-1">{book.title}</h2>
+              <p class="text-rssb-gold text-xs font-medium mb-2">by {book.author}</p>
+              <p class="text-gray-600 text-sm leading-relaxed">{book.description}</p>
+              <div class="flex flex-wrap gap-1 mt-3">
+                {book.topics.map(topic => (
+                  <span class="text-xs bg-red-50 text-rssb-red border border-red-200 px-2 py-0.5 rounded-full capitalize">{topic}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-12 bg-gradient-to-r from-rssb-redDark to-rssb-red text-white rounded-2xl p-8 text-center">
+        <h3 class="font-serif text-xl font-bold mb-2">Get RSSB Books</h3>
+        <p class="text-red-200 text-sm mb-4">All RSSB books are available at cost price from your nearest satsang center or the official RSSB website.</p>
+        <div class="flex justify-center gap-3 flex-wrap">
+          <a href="/satsang-centers" class="bg-white text-rssb-red font-bold px-5 py-2 rounded-full text-sm hover:bg-red-50 transition">Find Nearest Center</a>
+          <a href="https://www.rssb.org/publications" target="_blank" class="border-2 border-rssb-gold text-rssb-goldLight font-bold px-5 py-2 rounded-full text-sm hover:bg-red-700 transition">Official RSSB Store ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

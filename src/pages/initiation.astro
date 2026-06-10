@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChatWidget from '../components/ChatWidget';
+---
+
+<Layout title="Initiation (Nam Daan)" description="What is RSSB initiation? Learn about Nam Daan — how to apply, eligibility, the four precepts, and what happens during initiation in Radha Soami Satsang Beas.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">Initiation — Nam Daan</h1>
+    <p class="text-red-200">Everything you need to know about RSSB initiation</p>
+  </div>
+
+  <article class="py-10 px-4">
+    <div class="max-w-3xl mx-auto space-y-8">
+
+      <div class="bg-rssb-cream rounded-2xl p-6 border-l-4 border-rssb-gold">
+        <p class="text-rssb-red font-serif text-lg italic">"Initiation is the beginning of the journey inward. The Master gives the seeker the key to open the door within."</p>
+        <p class="text-gray-500 text-sm mt-2">— RSSB Teachings</p>
+      </div>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-3">What is Nam Daan?</h2>
+        <p class="text-gray-700 leading-relaxed">Nam Daan (initiation) is when a living Master gives a sincere seeker the technique of inner meditation — the five holy Names to repeat (Simran) and the method for withdrawing consciousness inward to hear the divine Sound Current (Bhajan). It is the formal beginning of the spiritual path under the Master's guidance.</p>
+        <p class="text-gray-700 leading-relaxed mt-3">Initiation is completely free of charge. The Master charges nothing and no money ever changes hands.</p>
+      </section>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">Eligibility</h2>
+        <ul class="space-y-3">
+          {[
+            "You must be at least 18 years old",
+            "You must sincerely want to know God and be willing to follow the spiritual path",
+            "You must agree to follow the four precepts for life (see below)",
+            "You should attend satsang and read RSSB books to understand the teachings",
+            "There is no caste, religion, nationality, or gender restriction",
+          ].map(item => (
+            <li class="flex gap-3 text-gray-700">
+              <span class="text-rssb-gold font-bold flex-shrink-0">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">The Four Precepts</h2>
+        <div class="space-y-4">
+          {[
+            { title: "Strict Vegetarianism", detail: "No meat, poultry, fish, or eggs. This includes items cooked with or containing these ingredients. The reason: all life is sacred and killing for food creates karmic debt that hinders spiritual progress." },
+            { title: "No Intoxicants", detail: "No alcohol, recreational drugs, or any substance that clouds the mind. The mind must be clear and still for meditation to be effective." },
+            { title: "Moral and Ethical Living", detail: "Live honestly. Earn by honest means. Do not harm others physically, verbally, or through deception. Observe right conduct in all areas of life." },
+            { title: "Daily Meditation (2.5 hours)", detail: "Practice the meditation technique — both Simran (repetition of Names) and Bhajan (listening to inner Sound) — for a minimum of 2.5 hours every day." },
+          ].map((item, i) => (
+            <div class="bg-white rounded-xl border border-red-200 p-5">
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 bg-rssb-red text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">{i + 1}</div>
+                <div>
+                  <h3 class="font-semibold text-rssb-red mb-1">{item.title}</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">{item.detail}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-3">How to Apply</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">Initiation is not something you "apply for" in a formal way. The process is:</p>
+        <ol class="space-y-3">
+          {[
+            "Attend satsang at your local RSSB satsang center regularly",
+            "Read RSSB books to understand the teachings thoroughly",
+            "Practice the four precepts sincerely for a period of time",
+            "When you feel ready and genuinely want initiation, express this to the local representative",
+            "Your name may be put forward for initiation when the Master visits or holds an initiation session",
+          ].map((step, i) => (
+            <li class="flex gap-3 text-gray-700">
+              <span class="text-rssb-red font-bold w-6 flex-shrink-0">{i + 1}.</span>
+              {step}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <div class="bg-gradient-to-r from-rssb-redDark to-rssb-red text-white rounded-2xl p-8 text-center">
+        <h3 class="font-serif text-xl font-bold mb-2">Want to know more?</h3>
+        <div class="flex justify-center gap-3 flex-wrap mt-4">
+          <a href="/ask" class="bg-white text-rssb-red font-bold px-5 py-2 rounded-full text-sm hover:bg-red-50 transition">Ask AI Guide</a>
+          <a href="/satsang-centers" class="border-2 border-rssb-gold text-rssb-goldLight font-bold px-5 py-2 rounded-full text-sm hover:bg-red-700 transition">Find Satsang Center</a>
+          <a href="/books/die-to-live" class="border-2 border-white text-white font-bold px-5 py-2 rounded-full text-sm hover:bg-red-700 transition">Read Die to Live</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <ChatWidget client:load />
+</Layout>

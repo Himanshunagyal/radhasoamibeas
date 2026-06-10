@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChatWidget from '../components/ChatWidget';
+
+const suggestedQuestions = [
+  "What is Nam Daan (initiation) in RSSB?",
+  "How many hours of meditation should I do daily?",
+  "What are the four precepts of RSSB?",
+  "Who is the current Master of RSSB?",
+  "What is Surat Shabd Yoga?",
+  "What books should a new initiate read?",
+  "What does RSSB say about vegetarianism?",
+  "How can I find a satsang center near me?",
+];
+---
+
+<Layout title="Ask AI Guide" description="Ask your questions about RSSB teachings, Sant Mat, meditation, initiation and spiritual path. AI guide powered by Groq.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">🙏 Ask the Sangat</h1>
+    <p class="text-red-200 max-w-xl mx-auto">Ask any question about RSSB teachings, Sant Mat, meditation, initiation, or the spiritual path. Our AI guide will answer humbly and simply.</p>
+  </div>
+
+  <section class="py-10 px-4 max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Chat (full page) -->
+      <div class="lg:col-span-2">
+        <div class="rounded-2xl overflow-hidden shadow-xl border-2 border-red-200">
+          <ChatWidget fullPage={true} client:load />
+        </div>
+        <p class="text-xs text-gray-400 mt-3 text-center">
+          AI responses are based on RSSB teachings and are not a substitute for official guidance. Always refer to RSSB books or your satsang center for authoritative answers.
+        </p>
+      </div>
+
+      <!-- Suggested Questions -->
+      <div>
+        <h2 class="font-serif text-xl font-bold text-rssb-red mb-4">Suggested Questions</h2>
+        <div class="space-y-2" id="suggestions">
+          {suggestedQuestions.map(q => (
+            <button
+              data-question={q}
+              class="suggested-q w-full text-left text-sm p-3 rounded-xl border border-red-200 hover:border-rssb-red hover:bg-rssb-cream transition text-gray-700"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+
+        <div class="mt-8 bg-rssb-cream rounded-xl p-4 border border-red-200">
+          <h3 class="font-semibold text-rssb-red mb-2 text-sm">Available in</h3>
+          <div class="flex gap-2 flex-wrap">
+            <span class="text-xs bg-white border border-red-200 px-2 py-1 rounded">English</span>
+            <span class="text-xs bg-white border border-red-200 px-2 py-1 rounded">हिंदी</span>
+            <span class="text-xs bg-white border border-red-200 px-2 py-1 rounded">ਪੰਜਾਬੀ</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Type in any language and the AI will respond in the same language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Wire up suggested questions to send to chat
+    document.querySelectorAll('.suggested-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = btn.getAttribute('data-question');
+        // Find chat input and simulate typing
+        const input = document.querySelector('input[placeholder*="RSSB"]') as HTMLInputElement;
+        if (input) {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
+          nativeInputValueSetter?.call(input, q);
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.focus();
+        }
+      });
+    });
+  </script>
+</Layout>

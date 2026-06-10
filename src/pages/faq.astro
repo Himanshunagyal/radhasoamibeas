@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { faqs } from '../content/data';
+import ChatWidget from '../components/ChatWidget';
+---
+
+<Layout title="FAQ" description="Frequently asked questions about RSSB — What is RSSB, how to get initiation, who is the current Master, what are the four precepts and more.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">Frequently Asked Questions</h1>
+    <p class="text-red-200">Common questions about RSSB, Sant Mat, and the spiritual path</p>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq, i) => (
+        <details class="border border-red-200 rounded-xl group bg-white overflow-hidden" open={i === 0}>
+          <summary class="px-6 py-4 cursor-pointer font-semibold text-rssb-red list-none flex justify-between items-start gap-3">
+            <span>{faq.q}</span>
+            <span class="text-rssb-gold mt-0.5 flex-shrink-0 group-open:rotate-180 transition-transform duration-200">▼</span>
+          </summary>
+          <div class="px-6 pb-5 text-gray-700 leading-relaxed border-t border-red-100 pt-4">
+            <p class="mb-3">{faq.a}</p>
+            {faq.a_hi && (
+              <details class="mt-3">
+                <summary class="text-sm text-rssb-red cursor-pointer font-medium">हिंदी में पढ़ें ▼</summary>
+                <p class="mt-2 text-sm text-gray-600 leading-relaxed">{faq.a_hi}</p>
+              </details>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-12 bg-rssb-cream rounded-2xl p-8 text-center border border-red-200">
+      <h3 class="font-serif text-xl font-bold text-rssb-red mb-2">Have more questions?</h3>
+      <p class="text-gray-600 text-sm mb-4">Ask our AI guide or visit your nearest satsang center for personal guidance.</p>
+      <div class="flex justify-center gap-3 flex-wrap">
+        <a href="/ask" class="bg-rssb-red text-white font-bold px-5 py-2 rounded-full text-sm hover:bg-rssb-redDark transition">🙏 Ask AI Guide</a>
+        <a href="/satsang-centers" class="border border-rssb-red text-rssb-red font-bold px-5 py-2 rounded-full text-sm hover:bg-rssb-cream transition">Find Satsang Center</a>
+      </div>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

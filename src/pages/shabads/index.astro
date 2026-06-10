@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { shabads } from '../../content/data';
+import ChatWidget from '../../components/ChatWidget';
+---
+
+<Layout title="Shabads" description="RSSB Shabads with Gurmukhi script, Roman transliteration, and English/Hindi meanings. Learn and share holy verses.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">🎵 Shabads</h1>
+    <p class="text-red-200">Holy verses with Gurmukhi, Roman transliteration, and meanings</p>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-4xl mx-auto space-y-6">
+      {shabads.map(shabad => (
+        <div class="bg-white rounded-2xl border border-red-200 overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-gradient-to-r from-rssb-redDark to-rssb-red px-6 py-3 flex items-center justify-between">
+            <h2 class="font-serif text-white font-bold text-lg">{shabad.title}</h2>
+            <span class="text-xs text-red-200 bg-red-900 bg-opacity-50 px-2 py-1 rounded-full capitalize">{shabad.topic}</span>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <p class="text-xs font-semibold text-rssb-gold uppercase tracking-wider mb-1">Gurmukhi</p>
+              <p class="text-2xl text-rssb-red font-medium leading-relaxed">{shabad.gurmukhi}</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Roman Transliteration</p>
+              <p class="text-lg text-gray-700 italic">{shabad.roman}</p>
+            </div>
+            <div class="border-t border-red-100 pt-4">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Meaning (English)</p>
+              <p class="text-gray-700">{shabad.meaning}</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">अर्थ (हिंदी)</p>
+              <p class="text-gray-700">{shabad.meaning_hi}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-10 bg-rssb-cream rounded-2xl p-6 border border-red-200 text-center">
+      <p class="text-rssb-red font-semibold mb-2">More shabads coming soon</p>
+      <p class="text-gray-500 text-sm">We are continuously adding more shabads with proper transliterations and meanings. Bookmark this page and check back!</p>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

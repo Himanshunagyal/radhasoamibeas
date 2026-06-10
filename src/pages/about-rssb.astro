@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChatWidget from '../components/ChatWidget';
+---
+
+<Layout title="About RSSB" description="What is Radha Soami Satsang Beas? Learn about RSSB history, teachings, Sant Mat philosophy, and the path of Surat Shabd Yoga.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">About Radha Soami Satsang Beas</h1>
+    <p class="text-red-200">Understanding RSSB, Sant Mat, and the path of the soul</p>
+  </div>
+
+  <article class="py-10 px-4">
+    <div class="max-w-3xl mx-auto space-y-10">
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">What is RSSB?</h2>
+        <p class="text-gray-700 leading-relaxed mb-3">
+          Radha Soami Satsang Beas (RSSB) is a spiritual organization established in 1891 at the village of Beas in Punjab, India. The name means: <em>Radha Soami</em> (Lord of the Soul), <em>Satsang</em> (association with Truth), and <em>Beas</em> (the town near which the main center is located).
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          RSSB is a non-profit, non-sectarian organization that teaches the path of <strong class="text-rssb-red">Sant Mat</strong> — the way of the Saints — under the guidance of a living spiritual teacher (the Master). It has over 100 affiliated organizations and holds satsang meetings in more than 90 countries worldwide.
+        </p>
+      </section>
+
+      <section class="bg-rssb-cream rounded-2xl p-6 border border-red-200">
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">The Teachings: Sant Mat</h2>
+        <div class="space-y-3 text-gray-700">
+          <p><strong class="text-rssb-red">God is within us.</strong> The soul is a drop of divine consciousness temporarily separated from its Source. The goal of human life is to return the soul to God.</p>
+          <p><strong class="text-rssb-red">The path is meditation.</strong> The practice is called Surat Shabd Yoga — the union of the soul (Surat) with the divine Sound Current (Shabd/Nam). This inner Light and Sound is the living Word of God within every being.</p>
+          <p><strong class="text-rssb-red">A living Master is needed.</strong> RSSB teaches that a living, realized human being (the Master) is essential to guide the soul within. The Master gives initiation (Nam Daan) and the practice technique freely.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">The Four Precepts</h2>
+        <p class="text-gray-600 text-sm mb-4">Before initiation, a person agrees to follow four conditions for life:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { num: "1", title: "Vegetarianism", desc: "Strict vegetarian diet — no meat, fish, or eggs. This reduces karmic burden and supports a clear, calm mind for meditation." },
+            { num: "2", title: "No Intoxicants", desc: "No alcohol, drugs, or any substance that disturbs the clarity of the mind. The mind must be alert for inner practice." },
+            { num: "3", title: "Moral Living", desc: "Lead an honest, ethical life. Earn through honest means. Do not harm others through words, actions, or deception." },
+            { num: "4", title: "Daily Meditation", desc: "Practice the meditation technique for a minimum of 2.5 hours daily — either all at once or in sittings." },
+          ].map(item => (
+            <div class="bg-white rounded-xl border border-red-200 p-5 flex gap-4">
+              <div class="w-10 h-10 bg-rssb-red text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">{item.num}</div>
+              <div>
+                <h3 class="font-semibold text-rssb-red mb-1">{item.title}</h3>
+                <p class="text-gray-600 text-sm">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-serif text-2xl font-bold text-rssb-red mb-4">Brief History</h2>
+        <div class="space-y-4">
+          {[
+            { year: "1818", event: "Birth of Soami Ji Maharaj (Shiv Dayal Singh Ji) in Agra" },
+            { year: "1861", event: "Soami Ji Maharaj begins public satsangs and teaching of Surat Shabd Yoga" },
+            { year: "1878", event: "Soami Ji Maharaj passes on. Baba Jaimal Singh Ji continues the lineage." },
+            { year: "1891", event: "Baba Jaimal Singh Ji establishes the Dera at Beas, Punjab" },
+            { year: "1903", event: "Maharaj Sawan Singh Ji becomes the Master at Beas" },
+            { year: "1948", event: "Maharaj Jagat Singh Ji becomes Master" },
+            { year: "1951", event: "Maharaj Charan Singh Ji becomes Master; RSSB grows globally" },
+            { year: "1990", event: "Baba Gurinder Singh Ji Dhillon becomes the current Master" },
+          ].map(item => (
+            <div class="flex gap-4">
+              <span class="text-rssb-gold font-bold w-12 flex-shrink-0">{item.year}</span>
+              <span class="text-gray-700 text-sm">{item.event}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="bg-gradient-to-r from-rssb-redDark to-rssb-red text-white rounded-2xl p-8 text-center">
+        <h3 class="font-serif text-xl font-bold mb-2">Want to learn more?</h3>
+        <p class="text-red-200 text-sm mb-4">Explore RSSB books, satsang summaries, or ask our AI guide.</p>
+        <div class="flex justify-center gap-3 flex-wrap">
+          <a href="/books" class="bg-white text-rssb-red font-bold px-5 py-2 rounded-full text-sm hover:bg-red-50 transition">Browse Books</a>
+          <a href="/ask" class="border-2 border-rssb-gold text-rssb-goldLight font-bold px-5 py-2 rounded-full text-sm hover:bg-red-700 transition">Ask AI Guide</a>
+          <a href="/initiation" class="border-2 border-white text-white font-bold px-5 py-2 rounded-full text-sm hover:bg-red-700 transition">About Initiation</a>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <ChatWidget client:load />
+</Layout>

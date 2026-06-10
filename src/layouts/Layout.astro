@@ -1,0 +1,113 @@
+---
+import '../styles/global.css';
+import { useTranslations, type Lang } from '../i18n/translations';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+}
+
+const { title, description = 'Devotional resource for Radha Soami Satsang Beas seekers worldwide', lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { href: '/', label: t('nav.home') },
+  { href: '/about-rssb', label: t('nav.about') },
+  { href: '/masters', label: t('nav.masters') },
+  { href: '/satsang', label: t('nav.satsang') },
+  { href: '/satsang-centers', label: t('nav.centers') },
+  { href: '/books', label: t('nav.books') },
+  { href: '/shabads', label: t('nav.shabads') },
+  { href: '/quotes', label: t('nav.quotes') },
+  { href: '/ask', label: t('nav.ask') },
+  { href: '/faq', label: t('nav.faq') },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} | RSSB Devotional</title>
+  <meta property="og:title" content={`${title} | RSSB Devotional`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+</head>
+<body class="bg-white text-gray-900">
+
+  <header style="background-color:#8B1A1A; color:white;">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between py-3" style="border-bottom:1px solid #6B1212;">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-white rounded flex items-center justify-center flex-shrink-0" style="border:2px solid #C8952A;">
+            <span style="color:#8B1A1A; font-weight:bold; font-size:11px; line-height:1.2; text-align:center;">RS<br/>SB</span>
+          </div>
+          <div>
+            <h1 style="font-family:Georgia,serif; font-size:1.4rem; font-weight:bold; letter-spacing:0.05em; text-transform:uppercase;">Radha Soami Satsang Beas</h1>
+            <p style="color:#E8B84B; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase;">Science of the Soul</p>
+          </div>
+        </a>
+        <div class="flex items-center gap-2 text-sm">
+          <a href={currentPath} class="px-2 py-1 rounded transition" style={lang==='en' ? 'background:#C8952A;color:#6B1212;font-weight:bold;' : 'hover:background:#6B1212;'}>EN</a>
+          <span style="color:#b45454;">|</span>
+          <a href={`/hi${currentPath}`} class="px-2 py-1 rounded" style={lang==='hi' ? 'background:#C8952A;color:#6B1212;font-weight:bold;' : ''}>हिंदी</a>
+          <span style="color:#b45454;">|</span>
+          <a href={`/pa${currentPath}`} class="px-2 py-1 rounded" style={lang==='pa' ? 'background:#C8952A;color:#6B1212;font-weight:bold;' : ''}>ਪੰਜਾਬੀ</a>
+        </div>
+      </div>
+      <nav class="py-1 overflow-x-auto">
+        <ul class="flex items-center gap-1 text-sm whitespace-nowrap pb-1">
+          {navLinks.map(link => (
+            <li>
+              <a href={link.href} class="px-3 py-2 rounded block transition"
+                style={currentPath === link.href ? 'background:#C8952A;color:#6B1212;font-weight:600;' : ''}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main><slot /></main>
+
+  <footer style="background-color:#6B1212; color:white; margin-top:4rem;">
+    <div class="max-w-7xl mx-auto px-4 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 style="font-family:Georgia,serif; font-size:1.1rem; font-weight:bold; color:#E8B84B; margin-bottom:0.75rem;">RSSB Devotional</h3>
+          <p style="color:#fca5a5; font-size:0.875rem; line-height:1.6;">{t('footer.disclaimer')}</p>
+        </div>
+        <div>
+          <h3 style="font-weight:600; color:#E8B84B; margin-bottom:0.75rem;">Quick Links</h3>
+          <ul class="space-y-1 text-sm" style="color:#fca5a5;">
+            <li><a href="/about-rssb" class="hover:text-white transition">About RSSB</a></li>
+            <li><a href="/initiation" class="hover:text-white transition">About Initiation</a></li>
+            <li><a href="/satsang-centers" class="hover:text-white transition">Find Satsang Center</a></li>
+            <li><a href="/books" class="hover:text-white transition">RSSB Books</a></li>
+            <li><a href="/ask" class="hover:text-white transition">Ask AI Chatbot</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-weight:600; color:#E8B84B; margin-bottom:0.75rem;">Official Resources</h3>
+          <ul class="space-y-1 text-sm" style="color:#fca5a5;">
+            <li><a href="https://www.rssb.org" target="_blank" rel="noopener" class="hover:text-white transition">Official RSSB Website ↗</a></li>
+            <li><a href="/privacy-policy" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="/contact" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 text-center text-sm" style="border-top:1px solid #8B1A1A; color:#fca5a5;">
+        🙏 Sat Naam — Made with love for the Sangat worldwide
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

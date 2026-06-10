@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { quotes, books, faqs } from '../content/data';
+import QuoteCard from '../components/QuoteCard';
+import ChatWidget from '../components/ChatWidget';
+
+const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+const todayQuote = quotes[dayOfYear % quotes.length];
+const featuredBooks = books.slice(0, 3);
+---
+
+<Layout title="Home" description="Devotional resource for Radha Soami Satsang Beas — daily quotes, satsang summaries, shabads, and AI guidance.">
+
+  <!-- Hero -->
+  <section style="background:linear-gradient(135deg,#6B1212,#8B1A1A,#A52020); color:white; padding:4rem 1rem; text-align:center;">
+    <p style="color:#E8B84B; letter-spacing:0.3em; font-size:0.8rem; text-transform:uppercase; margin-bottom:0.75rem;">🕉 Sat Naam</p>
+    <h1 style="font-family:Georgia,serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:bold; margin-bottom:1rem;">Science of the Soul</h1>
+    <p style="color:#fca5a5; font-size:1.1rem; max-width:600px; margin:0 auto 2rem; line-height:1.7;">
+      A devotional resource for Radha Soami Satsang Beas seekers worldwide — quotes, satsang summaries, shabads, and AI guidance.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+      <a href="/satsang" style="background:#C8952A; color:#6B1212; font-weight:bold; padding:0.75rem 1.5rem; border-radius:9999px; text-decoration:none;">📖 Satsang Summaries</a>
+      <a href="/ask" style="background:white; color:#8B1A1A; font-weight:bold; padding:0.75rem 1.5rem; border-radius:9999px; text-decoration:none;">🙏 Ask AI Guide</a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="background:#6B1212; color:white; padding:1rem;">
+    <div style="max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; text-align:center;">
+      <div><p style="font-size:1.5rem; font-weight:bold; color:#E8B84B;">90+</p><p style="color:#fca5a5; font-size:0.75rem;">Countries</p></div>
+      <div><p style="font-size:1.5rem; font-weight:bold; color:#E8B84B;">1891</p><p style="color:#fca5a5; font-size:0.75rem;">Established</p></div>
+      <div><p style="font-size:1.5rem; font-weight:bold; color:#E8B84B;">100+</p><p style="color:#fca5a5; font-size:0.75rem;">Organizations</p></div>
+      <div><p style="font-size:1.5rem; font-weight:bold; color:#E8B84B;">Free</p><p style="color:#fca5a5; font-size:0.75rem;">No Charges</p></div>
+    </div>
+  </section>
+
+  <!-- Daily Quote -->
+  <section style="background:#FDF8F0; padding:3rem 1rem;">
+    <div style="max-width:600px; margin:0 auto;">
+      <h2 style="font-family:Georgia,serif; font-size:2rem; font-weight:bold; color:#8B1A1A; text-align:center; margin-bottom:0.5rem;">Daily Quote</h2>
+      <p style="text-align:center; color:#9ca3af; font-size:0.875rem; margin-bottom:2rem;">A new quote every day • Share with the Sangat 🙏</p>
+      <QuoteCard quote={todayQuote} lang="en" client:load />
+      <div style="text-align:center; margin-top:1.5rem;">
+        <a href="/quotes" style="color:#8B1A1A; font-weight:600; text-decoration:none;">Browse all quotes →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore Cards -->
+  <section style="padding:3rem 1rem; background:white;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <h2 style="font-family:Georgia,serif; font-size:2rem; font-weight:bold; color:#8B1A1A; text-align:center; margin-bottom:2rem;">Explore</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem;">
+        {[
+          { href: '/shabads', icon: '🎵', label: 'Shabads' },
+          { href: '/satsang', icon: '📖', label: 'Satsang' },
+          { href: '/books', icon: '📚', label: 'Books' },
+          { href: '/satsang-centers', icon: '📍', label: 'Centers' },
+          { href: '/masters', icon: '🙏', label: 'Masters' },
+          { href: '/ask', icon: '🤖', label: 'Ask AI' },
+        ].map(item => (
+          <a href={item.href} style="display:flex; flex-direction:column; align-items:center; padding:1rem; border-radius:0.75rem; border:2px solid #fee2e2; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='#8B1A1A'" onmouseout="this.style.borderColor='#fee2e2'">
+            <span style="font-size:2rem; margin-bottom:0.5rem;">{item.icon}</span>
+            <span style="font-size:0.875rem; font-weight:600; color:#8B1A1A;">{item.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Books -->
+  <section style="background:#FDF8F0; padding:3rem 1rem;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <h2 style="font-family:Georgia,serif; font-size:2rem; font-weight:bold; color:#8B1A1A; text-align:center; margin-bottom:0.5rem;">RSSB Books</h2>
+      <p style="text-align:center; color:#9ca3af; font-size:0.875rem; margin-bottom:2rem;">Essential reading on the spiritual path</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;">
+        {featuredBooks.map(book => (
+          <a href={`/books/${book.slug}`} style="background:white; border-radius:0.75rem; padding:1.5rem; border:1px solid #fee2e2; text-decoration:none; display:block; transition:box-shadow 0.2s;">
+            <div style="width:3rem; height:4rem; background:#8B1A1A; border-radius:0.5rem; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">📗</div>
+            <h3 style="font-family:Georgia,serif; font-weight:bold; color:#8B1A1A; margin-bottom:0.25rem;">{book.title}</h3>
+            <p style="color:#C8952A; font-size:0.75rem; margin-bottom:0.5rem;">by {book.author}</p>
+            <p style="color:#4b5563; font-size:0.875rem; line-height:1.5;">{book.description}</p>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:1.5rem;">
+        <a href="/books" style="color:#8B1A1A; font-weight:600; text-decoration:none;">View all books →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding:3rem 1rem; background:white;">
+    <div style="max-width:700px; margin:0 auto;">
+      <h2 style="font-family:Georgia,serif; font-size:2rem; font-weight:bold; color:#8B1A1A; text-align:center; margin-bottom:2rem;">Common Questions</h2>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        {faqs.slice(0, 3).map(faq => (
+          <details style="border:1px solid #fecaca; border-radius:0.75rem; overflow:hidden;">
+            <summary style="padding:1rem 1.25rem; cursor:pointer; font-weight:600; color:#8B1A1A; list-style:none; display:flex; justify-content:space-between;">
+              {faq.q} <span style="color:#C8952A;">▼</span>
+            </summary>
+            <div style="padding:0.75rem 1.25rem 1rem; color:#374151; font-size:0.9rem; line-height:1.6; border-top:1px solid #fee2e2;">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:1.5rem;">
+        <a href="/faq" style="color:#8B1A1A; font-weight:600; text-decoration:none;">View all FAQs →</a>
+      </div>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatWidget from '../../components/ChatWidget';
+
+const posts = [
+  {
+    slug: "what-is-simran",
+    title: "What is Simran? The Practice of Remembrance in Sant Mat",
+    excerpt: "Simran — the repetition of the five holy Names — is the foundation of RSSB meditation practice. Learn why the Masters emphasize it as the first step on the spiritual journey.",
+    topic: "simran",
+    date: "2024-01-15",
+    readTime: "5 min",
+  },
+  {
+    slug: "importance-of-seva",
+    title: "Seva: Why Service is Central to the Spiritual Path",
+    excerpt: "In RSSB, seva (selfless service) is considered one of the three pillars of spiritual practice alongside Simran and Satsang. Discover how seva purifies the mind and deepens meditation.",
+    topic: "seva",
+    date: "2024-01-22",
+    readTime: "6 min",
+  },
+  {
+    slug: "vegetarianism-rssb",
+    title: "Why RSSB Requires Vegetarianism: The Spiritual Reason",
+    excerpt: "One of the four precepts for initiation is strict vegetarianism. This isn't just a dietary rule — the Masters explain its deep connection to karma, compassion, and meditation.",
+    topic: "vegetarianism",
+    date: "2024-02-01",
+    readTime: "7 min",
+  },
+  {
+    slug: "death-in-sant-mat",
+    title: "Death and the Soul: What RSSB Teaches About the Afterlife",
+    excerpt: "The Masters describe death not as an end but as a transition. What happens to the soul after death? What is the role of the Master at the time of death? An overview of RSSB teachings.",
+    topic: "death",
+    date: "2024-02-10",
+    readTime: "8 min",
+  },
+  {
+    slug: "satsang-its-importance",
+    title: "The Power of Satsang: Why Spiritual Company Matters",
+    excerpt: "The Masters consistently stress attending satsang as one of the most important practices for initiates. What is satsang, why does it help, and how should we approach it?",
+    topic: "satsang",
+    date: "2024-02-18",
+    readTime: "5 min",
+  },
+  {
+    slug: "mind-in-rssb-teachings",
+    title: "The Mind: Your Greatest Enemy and Greatest Friend",
+    excerpt: "RSSB teachings speak extensively about the nature of the mind — how it keeps the soul trapped in the world, and how Simran can tame it and transform it into a vehicle for God-realization.",
+    topic: "mind",
+    date: "2024-02-25",
+    readTime: "7 min",
+  },
+];
+
+const topics = [...new Set(posts.map(p => p.topic))];
+---
+
+<Layout title="Satsang Summaries" description="RSSB satsang summaries and spiritual articles — Learn about simran, seva, meditation, death, the mind, and Sant Mat teachings in simple language.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">📖 Satsang Summaries</h1>
+    <p class="text-red-200">Spiritual articles based on RSSB teachings — in simple, everyday language</p>
+  </div>
+
+  <!-- Topic Filter -->
+  <div class="bg-rssb-cream border-b border-red-200 py-4 px-4">
+    <div class="max-w-5xl mx-auto flex flex-wrap gap-2 justify-center">
+      <span class="text-rssb-red font-semibold text-sm">Topics:</span>
+      {topics.map(t => (
+        <a href={`/topics/${t}`} class="text-xs px-3 py-1 rounded-full border border-rssb-red text-rssb-red hover:bg-rssb-red hover:text-white transition capitalize">{t}</a>
+      ))}
+    </div>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      {posts.map(post => (
+        <a href={`/satsang/${post.slug}`} class="bg-white rounded-2xl border border-red-200 hover:border-rssb-red hover:shadow-lg transition p-6 group">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs bg-rssb-cream text-rssb-red border border-red-200 px-2 py-0.5 rounded-full capitalize font-medium">{post.topic}</span>
+            <span class="text-xs text-gray-400">{post.readTime} read</span>
+          </div>
+          <h2 class="font-serif font-bold text-rssb-red group-hover:text-rssb-redDark text-lg leading-tight mb-2">{post.title}</h2>
+          <p class="text-gray-600 text-sm leading-relaxed">{post.excerpt}</p>
+          <p class="text-rssb-red text-sm font-semibold mt-4 group-hover:underline">Read more →</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+</Layout>

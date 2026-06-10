@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { centers } from '../../content/data';
+import ChatWidget from '../../components/ChatWidget';
+
+const states = [...new Set(centers.map(c => c.state))];
+---
+
+<Layout title="Satsang Centers" description="Find RSSB Radha Soami Satsang Beas centers near you — directory of satsang ghars across India and worldwide.">
+
+  <div class="bg-rssb-red text-white py-10 px-4 text-center">
+    <h1 class="font-serif text-4xl font-bold mb-2">📍 Satsang Centers</h1>
+    <p class="text-red-200">Find RSSB Satsang Ghars near you across India and worldwide</p>
+  </div>
+
+  <!-- Search -->
+  <div class="bg-rssb-cream border-b border-red-200 py-4 px-4">
+    <div class="max-w-2xl mx-auto">
+      <input
+        type="text"
+        id="center-search"
+        placeholder="Search by city or state..."
+        class="w-full px-4 py-3 rounded-full border-2 border-red-200 focus:border-rssb-red focus:outline-none text-gray-700"
+      />
+    </div>
+  </div>
+
+  <section class="py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Main Dera highlight -->
+      <div class="bg-gradient-to-r from-rssb-redDark to-rssb-red text-white rounded-2xl p-6 mb-10 flex flex-col md:flex-row items-center gap-4">
+        <div class="text-5xl">🏛️</div>
+        <div class="flex-1">
+          <span class="text-rssb-goldLight text-xs font-bold uppercase tracking-wider">Main Dera</span>
+          <h2 class="font-serif text-2xl font-bold mt-1">Dera Baba Jaimal Singh</h2>
+          <p class="text-red-200 mt-1">Beas, Punjab 143204, India — Est. 1891</p>
+          <p class="text-red-300 text-sm mt-2">The spiritual headquarters of RSSB, located on the banks of the Beas River in Punjab, India.</p>
+        </div>
+        <a href="https://maps.google.com/?q=Dera+Baba+Jaimal+Singh+Beas" target="_blank" class="bg-rssb-gold text-rssb-redDark font-bold px-4 py-2 rounded-full text-sm hover:bg-rssb-goldLight transition whitespace-nowrap">
+          View on Map ↗
+        </a>
+      </div>
+
+      <!-- Centers Grid -->
+      <h2 class="font-serif text-2xl font-bold text-rssb-red mb-6">Satsang Ghars — India</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="centers-grid">
+        {centers.filter(c => c.type !== 'Main Dera').map(center => (
+          <div class="center-card bg-white rounded-xl border border-red-200 hover:border-rssb-red hover:shadow-md transition p-5" data-search={`${center.city} ${center.state}`.toLowerCase()}>
+            <div class="flex items-start gap-3">
+              <span class="text-2xl mt-1">🏠</span>
+              <div>
+                <h3 class="font-semibold text-rssb-red">{center.city}</h3>
+                <p class="text-xs text-gray-500 mb-1">{center.state}</p>
+                <p class="text-sm text-gray-600">{center.address}</p>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(center.address)}`}
+                  target="_blank"
+                  class="text-xs text-rssb-red hover:underline mt-2 inline-block"
+                >
+                  Open in Maps ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 bg-rssb-cream rounded-2xl p-8 text-center border border-red-200">
+        <h3 class="font-serif text-xl font-bold text-rssb-red mb-2">Can't find your city?</h3>
+        <p class="text-gray-600 text-sm mb-4">For the complete worldwide directory of satsang centers, please visit the official RSSB website.</p>
+        <a href="https://www.rssb.org" target="_blank" class="bg-rssb-red text-white px-6 py-3 rounded-full font-bold hover:bg-rssb-redDark transition text-sm">
+          Visit rssb.org for Full Directory ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ChatWidget client:load />
+
+  <script>
+    const searchInput = document.getElementById('center-search') as HTMLInputElement;
+    const cards = document.querySelectorAll('.center-card');
+    
+    searchInput?.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const searchVal = card.getAttribute('data-search') || '';
+        (card as HTMLElement).style.display = searchVal.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</Layout>
